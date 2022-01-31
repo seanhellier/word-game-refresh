@@ -27,29 +27,55 @@ compareKeyToString {
     put it in correct position on page
 }
 */
-
+var guessWord = document.getElementById("guessWord");
 var numTries = document.getElementById("numTries");
 var numWins = document.getElementById("numWins");
 var numLosses = document.getElementById("numLosses");
+
+var gameActive = true;
 var guessesLeft = 10;
 var blanksNum = 0;
 
 var musicalActs = ["apollo100", "beethoven", "mozart"];
 
 var startGame = function () {
-	console.log("game start");
 	var choice = Math.floor(Math.random() * musicalActs.length);
-	console.log(choice);
-
 	var answer = musicalActs[choice];
-	console.log(answer);
+	// console.log(answer, "word");
 
 	var letters = Array.from(answer);
 	console.log("letters", letters);
 	var blanksNum = answer.length;
-	console.log(blanksNum, "blanksNum");
+	// console.log(blanksNum, "blanksNum");
+	CreateLetters();
+
+	function CreateLetters() {
+		var blanks = [];
+		for (let i = 0; i < answer.length; i++) {
+			blanks.push("_");
+			guessWord.innerHTML = blanks.join(" ");
+			console.log(blanks, "blanks");
+		}
+
+		// for (var i = 0; i < answer.length; i++) {
+		//     // for the if/else statement, IF userLetter is in "answer" we want to replace the __ on the screen
+		//     if (guess === answer[i]) {
+		//         foundMatch = true;
+		//         letters[i] = guess;
+		//         displayLetters();
+
+		//     }
+	}
 };
 
+function displayLetters() {}
+
 window.onload = function () {
+	document.onkeyup = function (event) {
+		const userGuess = event.key;
+		console.log(userGuess, "userGuess");
+		// displayLetters();
+		displayLetters(userGuess);
+	};
 	startGame();
 };
