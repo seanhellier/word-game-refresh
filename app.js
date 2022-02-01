@@ -26,7 +26,6 @@ var numLosses = document.getElementById("numLosses");
 
 var gameActive = true;
 var guessesLeft = 10;
-var blanksNum = 0;
 var answer = "";
 var foundMatch = false;
 
@@ -35,7 +34,7 @@ var musicalActs = ["apollo100", "beethoven", "mozart"];
 var startGame = function (guess) {
 	var choice = Math.floor(Math.random() * musicalActs.length);
 	var answer = musicalActs[choice];
-	// console.log(answer, "computer guess");
+	console.log(answer, "computer guess");
 	checkGuess(answer);
 
 	var letters = Array.from(answer);
@@ -49,13 +48,11 @@ var startGame = function (guess) {
 		for (let i = 0; i < answer.length; i++) {
 			blanks.push("_");
 			guessWord.innerHTML = blanks.join(" ");
-			console.log(blanks, "blanks");
+			// console.log(blanks, "blanks");
 		}
 	}
 };
-function checkGuess(guess, answer) {
-	console.log(answer, "this is scope");
-
+function checkGuess(guess) {
 	var foundMatch = false;
 	for (var i = 0; i < answer.length; i++) {
 		if (guess === answer[i]) {
