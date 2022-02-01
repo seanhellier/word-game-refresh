@@ -51,31 +51,28 @@ var startGame = function (guess) {
 			console.log(blanks, "blanks");
 		}
 	}
-};
-function checkGuess(guess) {
-	var foundMatch = false;
-	for (var i = 0; i < answer.length; i++) {
-		if (guess === answer[i]) {
-			foundMatch = true;
-			blanks[i] = guess;
-			console.log(guess);
-			console.log(letters[i], "valhalla");
-			displayLetters();
+
+	function checkGuess(guess, blanks) {
+		console.log(guess, "checkGuess");
+		console.log(answer, "answer in checkGuess");
+		var foundMatch = false;
+		for (var i = 0; i < answer.length; i++) {
+			console.log(answer.length, "answer.length");
+			if (guess === answer[i]) {
+				foundMatch = true;
+				blanks[i] = guess;
+				console.log(answer, "answer");
+				displayLetters();
+			}
 		}
 	}
-}
 
-// function checkGuess(guess) {
-// 	console.log(guess, "userGuess");
-// }
-
-window.onload = function () {
-	document.onkeyup = function (event) {
-		const userGuess = event.key;
-		console.log(userGuess);
-		// displayLetters();
-		// displayLetters(userGuess);
-		checkGuess(userGuess);
+	window.onload = function () {
+		document.onkeyup = function (event) {
+			const userGuess = event.key;
+			checkGuess(userGuess);
+		};
 	};
-	startGame();
 };
+
+startGame();
