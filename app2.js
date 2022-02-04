@@ -61,7 +61,7 @@ var startGame = function (guess) {
 			if (guess === answer[i]) {
 				foundMatch = true;
 				blanks[i] = guess;
-				console.log(answer, "answer");
+
 				displayLetters();
 			}
 		}
