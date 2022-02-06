@@ -33,6 +33,8 @@ var foundMatch = false;
 var musicalActs = ["apollo100", "beethoven", "mozart"];
 
 var startGame = function (guess) {
+	guessesLeft = 10;
+	document.getElementById("guessesLeft").innerHTML = guessesLeft;
 	var choice = Math.floor(Math.random() * musicalActs.length);
 	var answer = musicalActs[choice];
 	var blanks = [];
@@ -56,8 +58,12 @@ var startGame = function (guess) {
 		//if correctLetter is in the answer, then we replce the blank index with this letter
 	}
 
+	function keepScore() {
+		guessesLeft--;
+		document.getElementById("guessesLeft").innerHTML = guessesLeft;
+	}
+
 	function checkGuess(guess) {
-		guessesLeft = 10;
 		console.log(guess, "checkGuess");
 		console.log(answer, "answer in checkGuess");
 		var foundMatch = false;
@@ -79,15 +85,11 @@ var startGame = function (guess) {
 		}
 		guessWord.innerHTML = blanks.join(" ");
 	}
-	var str = "scissors";
-	var indices = [];
-	for (var i = 0; i < str.length; i++) {
-		if (str[i] === "s") indices.push(i);
-	}
 
 	window.onload = function () {
 		document.onkeyup = function (event) {
 			const userGuess = event.key;
+			keepScore();
 			checkGuess(userGuess);
 		};
 	};
