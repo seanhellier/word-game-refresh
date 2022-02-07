@@ -26,9 +26,11 @@ var numLosses = document.getElementById("numLosses");
 
 var gameActive = true;
 var guessesLeft = 0;
+var wins = 0;
 var losses = 0;
 var answer = "";
 var foundMatch = false;
+var resetText = "";
 
 var musicalActs = ["apollo100", "beethoven", "mozart"];
 
@@ -52,15 +54,40 @@ var startGame = function (guess) {
 		for (let i = 0; i < answer.length; i++) {
 			blanks.push("_");
 			guessWord.innerHTML = blanks.join(" ");
-			console.log(blanks, "blanks");
+			// console.log(blanks, "blanks");
 		}
 
 		//if correctLetter is in the answer, then we replce the blank index with this letter
 	}
 
 	function keepScore() {
-		guessesLeft--;
-		document.getElementById("guessesLeft").innerHTML = guessesLeft;
+		// guessesLeft--;
+		// document.getElementById("guessesLeft").innerHTML = guessesLeft;
+
+		if (foundMatch) {
+			guessesLeft--;
+			document.getElementById("guessesLeft").innerHTML = guessesLeft;
+			console.log("You found a match");
+			// if (!blanks.includes("_")) {
+			// 	resetText = "You have won!";
+			// 	wins++;
+			// 	document.getElementById("numWins").innerHTML = "number of wins" + wins;
+
+			// 	gameActive = false;
+			// }
+		} else {
+			guessesLeft--;
+			document.getElementById("guessesLeft").innerHTML = guessesLeft;
+			console.log("missed");
+			if (guessesLeft === 0) {
+				resetText = "you have lost!";
+				losses++;
+				document.getElementById("numWins").innerHTML = wins;
+				gameActive = false;
+			}
+			console.log(guessesLeft);
+			document.getElementById("numWins").innerHTML = losses;
+		}
 	}
 
 	function checkGuess(guess) {
@@ -81,8 +108,10 @@ var startGame = function (guess) {
 			//foundMatch = true;
 			for (let q = 0; q < indexes.length; q++) {
 				blanks[indexes[q]] = guess;
+				foundMatch = true;
 			}
 		}
+		foundMatch = true;
 		guessWord.innerHTML = blanks.join(" ");
 	}
 
