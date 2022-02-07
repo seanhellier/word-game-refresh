@@ -62,7 +62,7 @@ var startGame = function (guess) {
 
 	function keepScore() {
 		if (foundMatch) {
-			console.log(foundMatch);
+			console.log(foundMatch, "you found a match");
 			guessesLeft--;
 			document.getElementById("guessesLeft").innerHTML = guessesLeft;
 			// console.log("You found a match");
@@ -73,18 +73,18 @@ var startGame = function (guess) {
 
 			// 	gameActive = false;
 			// }
-		} else if (!foundMatch) {
+		} else {
 			guessesLeft--;
 			document.getElementById("guessesLeft").innerHTML = guessesLeft;
-			console.log("missed");
+			console.log(foundMatch, "missed");
 			// if (guessesLeft === 0) {
 			// 	resetText = "you have lost!";
 			// 	losses++;
 			// 	document.getElementById("numWins").innerHTML = wins;
 			// 	gameActive = false;
 			// }
-			console.log(guessesLeft);
-			document.getElementById("numWins").innerHTML = losses;
+			// console.log(guessesLeft);
+			// document.getElementById("numWins").innerHTML = losses;
 		}
 	}
 
@@ -94,7 +94,6 @@ var startGame = function (guess) {
 		let indexes = [];
 
 		for (var i = 0; i < answer.length; i++) {
-			console.log(answer.length, "answer.length");
 			if (guess === answer[i]) {
 				indexes.push(i);
 			}
