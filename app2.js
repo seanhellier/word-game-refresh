@@ -40,12 +40,12 @@ var startGame = function (guess) {
 	var choice = Math.floor(Math.random() * musicalActs.length);
 	var answer = musicalActs[choice];
 	var blanks = [];
-	console.log(answer, "computer guess");
+	console.log(answer);
 	// guessesLeft = 10;
 	// document.getElementById("guessesLeft").innerHTML = "guessesLeft";
 
 	var letters = Array.from(answer);
-	console.log("letters", letters);
+	console.log(letters);
 	var blanksNum = answer.length;
 	// console.log(blanksNum, "blanksNum");
 	createBlanks();
@@ -61,13 +61,11 @@ var startGame = function (guess) {
 	}
 
 	function keepScore() {
-		// guessesLeft--;
-		// document.getElementById("guessesLeft").innerHTML = guessesLeft;
-
 		if (foundMatch) {
+			console.log(foundMatch);
 			guessesLeft--;
 			document.getElementById("guessesLeft").innerHTML = guessesLeft;
-			console.log("You found a match");
+			// console.log("You found a match");
 			// if (!blanks.includes("_")) {
 			// 	resetText = "You have won!";
 			// 	wins++;
@@ -75,25 +73,24 @@ var startGame = function (guess) {
 
 			// 	gameActive = false;
 			// }
-		} else {
+		} else if (!foundMatch) {
 			guessesLeft--;
 			document.getElementById("guessesLeft").innerHTML = guessesLeft;
 			console.log("missed");
-			if (guessesLeft === 0) {
-				resetText = "you have lost!";
-				losses++;
-				document.getElementById("numWins").innerHTML = wins;
-				gameActive = false;
-			}
+			// if (guessesLeft === 0) {
+			// 	resetText = "you have lost!";
+			// 	losses++;
+			// 	document.getElementById("numWins").innerHTML = wins;
+			// 	gameActive = false;
+			// }
 			console.log(guessesLeft);
 			document.getElementById("numWins").innerHTML = losses;
 		}
 	}
 
 	function checkGuess(guess) {
-		console.log(guess, "checkGuess");
-		console.log(answer, "answer in checkGuess");
-		var foundMatch = false;
+		// console.log(guess, "checkGuess");
+		// console.log(answer, "answer in checkGuess");
 		let indexes = [];
 
 		for (var i = 0; i < answer.length; i++) {
@@ -109,9 +106,9 @@ var startGame = function (guess) {
 			for (let q = 0; q < indexes.length; q++) {
 				blanks[indexes[q]] = guess;
 				foundMatch = true;
+				keepScore(foundMatch);
 			}
 		}
-		foundMatch = true;
 		guessWord.innerHTML = blanks.join(" ");
 	}
 
