@@ -27,10 +27,11 @@ var numLosses = document.getElementById("numLosses");
 var gameActive = true;
 var guessesLeft = 0;
 var wins = 0;
-var losses = 0;
+var numLosses = 0;
 var answer = "";
 var foundMatch = false;
 var resetText = "";
+var numWins = 0;
 
 var musicalActs = ["apollo100", "beethoven", "mozart"];
 
@@ -67,34 +68,26 @@ var startGame = function (guess) {
 			document.getElementById("guessesLeft").innerHTML = guessesLeft;
 			// console.log("You found a match");
 			if (!blanks.includes("_")) {
-				console.log("you have won");
 				resetText = "You have won!";
 				document.getElementById("resetText").innerHTML = resetText;
-
-				wins++;
-				document.getElementById("numWins").innerHTML = "number of wins" + wins;
-
-				gameActive = false;
+				numWins++;
+				document.getElementById("numWins").innerHTML =
+					"number of wins " + numWins;
 			}
 		} else {
 			guessesLeft--;
 			document.getElementById("guessesLeft").innerHTML = guessesLeft;
-			console.log(foundMatch, "missed");
 			if (guessesLeft === 0) {
 				resetText = "you have lost!";
 				document.getElementById("resetText").innerHTML = resetText;
-				losses++;
-				document.getElementById("numWins").innerHTML = wins;
-				gameActive = false;
+				numLosses++;
+				document.getElementById("numWins").innerHTML =
+					"number of losses " + numLosses;
 			}
-			// console.log(guessesLeft);
-			// document.getElementById("numWins").innerHTML = losses;
 		}
 	}
 
 	function checkGuess(guess) {
-		// console.log(guess, "checkGuess");
-		// console.log(answer, "answer in checkGuess");
 		let indexes = [];
 
 		for (var i = 0; i < answer.length; i++) {
@@ -105,11 +98,9 @@ var startGame = function (guess) {
 
 		//if there are matches
 		if (indexes.length > 0) {
-			//foundMatch = true;
 			for (let q = 0; q < indexes.length; q++) {
 				blanks[indexes[q]] = guess;
 				foundMatch = true;
-				// keepScore(foundMatch);
 			}
 		}
 		guessWord.innerHTML = blanks.join(" ");
