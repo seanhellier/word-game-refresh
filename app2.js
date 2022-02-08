@@ -66,23 +66,27 @@ var startGame = function (guess) {
 			guessesLeft--;
 			document.getElementById("guessesLeft").innerHTML = guessesLeft;
 			// console.log("You found a match");
-			// if (!blanks.includes("_")) {
-			// 	resetText = "You have won!";
-			// 	wins++;
-			// 	document.getElementById("numWins").innerHTML = "number of wins" + wins;
+			if (!blanks.includes("_")) {
+				console.log("you have won");
+				resetText = "You have won!";
+				document.getElementById("resetText").innerHTML = resetText;
 
-			// 	gameActive = false;
-			// }
+				wins++;
+				document.getElementById("numWins").innerHTML = "number of wins" + wins;
+
+				gameActive = false;
+			}
 		} else {
 			guessesLeft--;
 			document.getElementById("guessesLeft").innerHTML = guessesLeft;
 			console.log(foundMatch, "missed");
-			// if (guessesLeft === 0) {
-			// 	resetText = "you have lost!";
-			// 	losses++;
-			// 	document.getElementById("numWins").innerHTML = wins;
-			// 	gameActive = false;
-			// }
+			if (guessesLeft === 0) {
+				resetText = "you have lost!";
+				document.getElementById("resetText").innerHTML = resetText;
+				losses++;
+				document.getElementById("numWins").innerHTML = wins;
+				gameActive = false;
+			}
 			// console.log(guessesLeft);
 			// document.getElementById("numWins").innerHTML = losses;
 		}
@@ -105,7 +109,7 @@ var startGame = function (guess) {
 			for (let q = 0; q < indexes.length; q++) {
 				blanks[indexes[q]] = guess;
 				foundMatch = true;
-				keepScore(foundMatch);
+				// keepScore(foundMatch);
 			}
 		}
 		guessWord.innerHTML = blanks.join(" ");
