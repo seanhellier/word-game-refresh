@@ -33,7 +33,7 @@ var foundMatch = false;
 var resetText = "";
 var numWins = 0;
 
-var musicalActs = ["apollo100", "beethoven", "mozart"];
+var musicalActs = ["apollo100", "beethoven", "mozart", "klf"];
 
 var startGame = function (guess) {
 	guessesLeft = 10;
@@ -42,23 +42,17 @@ var startGame = function (guess) {
 	var answer = musicalActs[choice];
 	var blanks = [];
 	console.log(answer);
-	// guessesLeft = 10;
-	// document.getElementById("guessesLeft").innerHTML = "guessesLeft";
 
 	var letters = Array.from(answer);
 	console.log(letters);
 	var blanksNum = answer.length;
-	// console.log(blanksNum, "blanksNum");
 	createBlanks();
 
 	function createBlanks() {
 		for (let i = 0; i < answer.length; i++) {
 			blanks.push("_");
 			guessWord.innerHTML = blanks.join(" ");
-			// console.log(blanks, "blanks");
 		}
-
-		//if correctLetter is in the answer, then we replce the blank index with this letter
 	}
 
 	function keepScore() {
@@ -66,7 +60,6 @@ var startGame = function (guess) {
 			console.log(foundMatch, "you found a match");
 			guessesLeft--;
 			document.getElementById("guessesLeft").innerHTML = guessesLeft;
-			// console.log("You found a match");
 			if (!blanks.includes("_")) {
 				resetText = "You have won!";
 				document.getElementById("resetText").innerHTML = resetText;
@@ -95,8 +88,6 @@ var startGame = function (guess) {
 				indexes.push(i);
 			}
 		}
-
-		//if there are matches
 		if (indexes.length > 0) {
 			for (let q = 0; q < indexes.length; q++) {
 				blanks[indexes[q]] = guess;
